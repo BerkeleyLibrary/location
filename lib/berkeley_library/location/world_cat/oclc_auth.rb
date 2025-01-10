@@ -10,6 +10,7 @@ module BerkeleyLibrary
         attr_accessor :token
 
         def initialize
+          # Sorry Rubocop - needs to be ||= because we're dealing with a singleton
           # rubocop:disable Lint/DisjunctiveAssignmentInConstructor
           @token ||= fetch_token
           # rubocop:enable Lint/DisjunctiveAssignmentInConstructor:
@@ -29,18 +30,13 @@ module BerkeleyLibrary
           JSON.parse(response.body, symbolize_names: true)
         end
 
-        # def token
-        #   @token = get_token if token_expired?
-        #   @token
-        # end
-
         def oclc_token_url
           URI.parse("#{Config.token_uri}?#{URI.encode_www_form(token_params)}")
         end
 
         # Before every request check if the token is expired (OCLC tokens expire after 20 minutes)
         def access_token
-          @token = token if token_expired?
+          @token = fetch_token if token_expired?
           @token[:access_token]
         end
 

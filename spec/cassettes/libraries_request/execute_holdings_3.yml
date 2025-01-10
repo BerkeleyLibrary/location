@@ -23,7 +23,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Tue, 07 Jan 2025 23:01:09 GMT
+      - Fri, 10 Jan 2025 20:39:29 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Transfer-Encoding:
@@ -31,52 +31,52 @@ http_interactions:
       Connection:
       - keep-alive
       X-Ratelimit-Remaining-Day:
-      - '149985'
+      - '149989'
       Ratelimit-Reset:
-      - '349131'
-      Ratelimit-Limit:
-      - '150000'
-      Ratelimit-Remaining:
-      - '149940'
-      X-Ratelimit-Remaining-Month:
-      - '149940'
+      - '98431'
       X-Ratelimit-Limit-Month:
+      - '150000'
+      X-Ratelimit-Remaining-Month:
+      - '149884'
+      Ratelimit-Remaining:
+      - '149884'
+      Ratelimit-Limit:
       - '150000'
       X-Ratelimit-Limit-Day:
       - '150000'
       X-Oclc-Requestid:
-      - 18270473-aa58-4240-b6fb-ca27060d6026
+      - 047b89fb-b6c5-44bf-9634-f0f07450e8cb
       X-Oclc-Selfid:
-      - 5aaaa264-a1cf-4a23-8c44-bfc5df2eb264
+      - d21778c6-e642-48c6-bc11-5796ab429f77
       Cache-Control:
       - max-age=3600
       Kong-Request-Id:
-      - 7dc290f2-87f5-4e2f-81ca-094a9706b8e7#9337611
+      - 7dc290f2-87f5-4e2f-81ca-094a9706b8e7#10934061
       X-Kong-Upstream-Latency:
-      - '67'
+      - '10'
       X-Kong-Proxy-Latency:
-      - '2'
+      - '1'
       Via:
       - 1.1 kong/3.8.0.0-enterprise-edition
       X-Kong-Request-Id:
-      - f2da9b21eb18203b70288c02375eb42c
+      - 6f17826248a7364597391e5b4b81ab53
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=pkZyzlIsu44s3J8uEFfQLZG96nyB38kADbk58EweVg8-1736290869-1.0.1.1-k_5cYJ2fKL6WE1EtmDFL7vCpAOf82twuICpLFkGz6HjOfL2D7mbQX8i1dFRIlFLwljBbkVl0CJt3.hbY9ZT_DQ;
-        path=/; expires=Tue, 07-Jan-25 23:31:09 GMT; domain=.oclc.org; HttpOnly; Secure;
+      - __cf_bm=oxGBLsppi11NUcst7YBw7q2tkPoSkhWEk978tTMBJXM-1736541569-1.0.1.1-gcXmEPrhTEBbVJQrIITULpPrVv2_0ENpvQHvXNplk9RRQiLsLBxA04WUWMzkCDP5KMR.82IE9SBgJNg.GH2pTg;
+        path=/; expires=Fri, 10-Jan-25 21:09:29 GMT; domain=.oclc.org; HttpOnly; Secure;
         SameSite=None
-      - _cfuvid=Wyvt_0JQhrkunbgPxSDnVEo8k5KurYZt1F1Dd5RFOT8-1736290869753-0.0.1.1-604800000;
+      - _cfuvid=6edYRnYB3nZJkVfdmLjQI5TgY5D2Pua0vakmMB.8ciA-1736541569118-0.0.1.1-604800000;
         path=/; domain=.oclc.org; HttpOnly; Secure; SameSite=None
       Server:
       - cloudflare
       Cf-Ray:
-      - 8fe7916def047d5c-LAX
+      - 8fff7a053ab9cb8a-LAX
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         eyJudW1iZXJPZlJlY29yZHMiOjEsImJyaWVmUmVjb3JkcyI6W3sib2NsY051bWJlciI6Ijg1ODMzMjg1IiwidGl0bGUiOiJUaGUgcXVpZXQgZ2lybCIsImNyZWF0b3IiOiJQZXRlciBIw7hlZyIsImRhdGUiOiLCqTIwMDciLCJtYWNoaW5lUmVhZGFibGVEYXRlIjoiMjAwNyIsImxhbmd1YWdlIjoiZW5nIiwiZ2VuZXJhbEZvcm1hdCI6IkJvb2siLCJzcGVjaWZpY0Zvcm1hdCI6IlByaW50Qm9vayIsImVkaXRpb24iOiIxc3QgQW1lcmljYW4gZWQiLCJwdWJsaXNoZXIiOiJGYXJyYXIsIFN0cmF1cywgYW5kIEdpcm91eCIsInB1YmxpY2F0aW9uUGxhY2UiOiJOZXcgWW9yayIsImlzYm5zIjpbIjk3ODAzNzQyNjM2OTAiLCIwMzc0MjYzNjk4Il0sIm1lcmdlZE9jbGNOdW1iZXJzIjpbIjk2NjQ5Mzg4NiIsIjk2Nzg0MjE0OSIsIjEwMjI3MTU1MzAiLCIxMDYwNjk1OTE0IiwiMTIwMTQ2NDAzNiIsIjEyMzAzNzE4ODYiLCIxMzAzODAxODEyIl0sImNhdGFsb2dpbmdJbmZvIjp7ImNhdGFsb2dpbmdBZ2VuY3kiOiJETEMiLCJjYXRhbG9naW5nTGFuZ3VhZ2UiOiJlbmciLCJsZXZlbE9mQ2F0YWxvZ2luZyI6IiAiLCJ0cmFuc2NyaWJpbmdBZ2VuY3kiOiJETEMifSwiaW5zdGl0dXRpb25Ib2xkaW5nIjp7InRvdGFsSG9sZGluZ0NvdW50IjozLCJicmllZkhvbGRpbmdzIjpbeyJjb3VudHJ5IjoiVVMiLCJzdGF0ZSI6IlVTLUNBIiwib2NsY1N5bWJvbCI6Ik1FUlVDIiwicmVnaXN0cnlJZCI6NDY5MSwiaW5zdGl0dXRpb25OdW1iZXIiOjM2MjEzLCJpbnN0aXR1dGlvbk5hbWUiOiJVbml2ZXJzaXR5IG9mIENhbGlmb3JuaWEsIE1lcmNlZCIsImFsc29DYWxsZWQiOiJVQyBNZXJjZWQgTGlicmFyeSIsImhhc09QQUNMaW5rIjp0cnVlLCJzZWxmIjoiaHR0cHM6Ly93b3JsZGNhdC5vcmcvb2NsYy1jb25maWcvaW5zdGl0dXRpb24vZGF0YS80NjkxIiwiYWRkcmVzcyI6eyJzdHJlZXQxIjoiTGVvICZhbXA7IERvdHRpZSBLb2xsaWdpYW4gTGlicmFyeSIsInN0cmVldDIiOiI1MjAwIE4gTGFrZSBSb2FkIiwiY2l0eSI6Ik1lcmNlZCIsInN0YXRlIjoiVVMtQ0EiLCJwb3N0YWxDb2RlIjoiOTUzNDMiLCJjb3VudHJ5IjoiVVMiLCJsYXQiOjM3LjM2NjI1NywibG9uIjotMTIwLjQyNDU3fSwiaW5zdGl0dXRpb25UeXBlIjoiQUNBREVNSUMifSx7ImNvdW50cnkiOiJVUyIsInN0YXRlIjoiVVMtQ0EiLCJvY2xjU3ltYm9sIjoiQ1VJIiwicmVnaXN0cnlJZCI6NTY1NiwiaW5zdGl0dXRpb25OdW1iZXIiOjExMDEsImluc3RpdHV0aW9uTmFtZSI6IlVuaXZlcnNpdHkgb2YgQ2FsaWZvcm5pYSwgSXJ2aW5lIiwiYWxzb0NhbGxlZCI6Ikxhbmdzb24gTGlicmFyeSIsImhhc09QQUNMaW5rIjp0cnVlLCJzZWxmIjoiaHR0cHM6Ly93b3JsZGNhdC5vcmcvb2NsYy1jb25maWcvaW5zdGl0dXRpb24vZGF0YS81NjU2IiwiYWRkcmVzcyI6eyJzdHJlZXQxIjoiVW5pdiBvZiBDYWxpZm9ybmlhIElydmluZSIsImNpdHkiOiJJcnZpbmUiLCJzdGF0ZSI6IlVTLUNBIiwicG9zdGFsQ29kZSI6IjkyNjk3IiwiY291bnRyeSI6IlVTIiwibGF0IjozMy42NDcyNjYsImxvbiI6LTExNy44NDEwMzR9LCJpbnN0aXR1dGlvblR5cGUiOiJBQ0FERU1JQyJ9LHsiY291bnRyeSI6IlVTIiwic3RhdGUiOiJVUy1DQSIsIm9jbGNTeW1ib2wiOiJDVVkiLCJyZWdpc3RyeUlkIjo1Njg5LCJpbnN0aXR1dGlvbk51bWJlciI6MTk5MywiaW5zdGl0dXRpb25OYW1lIjoiVUMgQmVya2VsZXkgTGlicmFyaWVzIiwiaGFzT1BBQ0xpbmsiOnRydWUsInNlbGYiOiJodHRwczovL3dvcmxkY2F0Lm9yZy9vY2xjLWNvbmZpZy9pbnN0aXR1dGlvbi9kYXRhLzU2ODkiLCJhZGRyZXNzIjp7InN0cmVldDEiOiIxMzMgRG9lIExpYnJhcnkiLCJzdHJlZXQyIjoiVW5pdmVyc2l0eSBvZiBDYWxpZm9ybmlhIiwiY2l0eSI6IkJlcmtlbGV5Iiwic3RhdGUiOiJVUy1DQSIsInBvc3RhbENvZGUiOiI5NDcyMC02MDAwIiwiY291bnRyeSI6IlVTIiwibGF0IjozNy44NzU3NSwibG9uIjotMTIyLjI0MzQxfSwiaW5zdGl0dXRpb25UeXBlIjoiQUNBREVNSUMifV19fV19
-  recorded_at: Tue, 07 Jan 2025 23:01:09 GMT
+  recorded_at: Fri, 10 Jan 2025 20:39:29 GMT
 recorded_with: VCR 6.3.1

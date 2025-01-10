@@ -23,7 +23,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Tue, 07 Jan 2025 23:01:10 GMT
+      - Fri, 10 Jan 2025 20:39:29 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Transfer-Encoding:
@@ -31,52 +31,52 @@ http_interactions:
       Connection:
       - keep-alive
       X-Ratelimit-Remaining-Day:
-      - '149984'
+      - '149988'
       Ratelimit-Reset:
-      - '349130'
-      Ratelimit-Limit:
-      - '150000'
-      Ratelimit-Remaining:
-      - '149939'
-      X-Ratelimit-Remaining-Month:
-      - '149939'
+      - '98431'
       X-Ratelimit-Limit-Month:
+      - '150000'
+      X-Ratelimit-Remaining-Month:
+      - '149883'
+      Ratelimit-Remaining:
+      - '149883'
+      Ratelimit-Limit:
       - '150000'
       X-Ratelimit-Limit-Day:
       - '150000'
       X-Oclc-Requestid:
-      - 18d86ace-2856-42ee-a167-0914f256aaf9
+      - f3a678ce-2003-43de-b608-0b44ef3503fe
       X-Oclc-Selfid:
-      - 7ca5538a-26fa-424d-9439-c245e4a3cb64
+      - 94171b70-bd39-4f6b-970f-acce4c0a9e8b
       Cache-Control:
       - max-age=3600
       Kong-Request-Id:
-      - 7dc290f2-87f5-4e2f-81ca-094a9706b8e7#9337615
+      - 7dc290f2-87f5-4e2f-81ca-094a9706b8e7#10934069
       X-Kong-Upstream-Latency:
-      - '21'
+      - '20'
       X-Kong-Proxy-Latency:
-      - '2'
+      - '1'
       Via:
       - 1.1 kong/3.8.0.0-enterprise-edition
       X-Kong-Request-Id:
-      - 50c70a3968e43e0628e70a293ca58939
+      - 31670633bf5dea5e0919773f34425304
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=EcJrMGZHWcR2qFk1t2cn0kzJ2_2k8n.1f73xNTAzDts-1736290870-1.0.1.1-81sIheAg2TEkFlNN05mnwcgnhXeqslV5tjV0_9lwB2Up7jxwUZ8OPyZoduT0ABmtKoDBBOH6weQ1oRNCLvFWAw;
-        path=/; expires=Tue, 07-Jan-25 23:31:10 GMT; domain=.oclc.org; HttpOnly; Secure;
+      - __cf_bm=PKEMgxlVHzpHH.M4JVx6j3AaRTNP7eUqlUPZn0lBA9o-1736541569-1.0.1.1-9R1IuCNAYVICpOObm3OlOnPj7Tzpm.TOJ4OHXGOqAhUl_vc9dl01ZM_hXFn1SmvW27OzCjOsfG6wwguMBWo5Cg;
+        path=/; expires=Fri, 10-Jan-25 21:09:29 GMT; domain=.oclc.org; HttpOnly; Secure;
         SameSite=None
-      - _cfuvid=VvwCiq3xtZgjwjSI12oasOYzKOJg9XAE7Q3JREBqB70-1736290870173-0.0.1.1-604800000;
+      - _cfuvid=ZmEpoK9tMyU5pilLpdXVOvkSOR4XEKeWXc8F6NV.mKM-1736541569626-0.0.1.1-604800000;
         path=/; domain=.oclc.org; HttpOnly; Secure; SameSite=None
       Server:
       - cloudflare
       Cf-Ray:
-      - 8fe79170beb42b72-LAX
+      - 8fff7a085f0b2b8e-LAX
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         eyJudW1iZXJPZlJlY29yZHMiOjEsImJyaWVmUmVjb3JkcyI6W3sib2NsY051bWJlciI6IjEwMDQ1MTkzIiwidGl0bGUiOiJEZSBTYWludC1Mb3VpcyBhIFRyaXBvbGkgcGFyIGxlIExhYyBUY2hhZCA6IHZveWFnZSBhdSB0cmF2ZXJzIGR1IFNvdWRhbiBldCBkdSBTYWhhcmEgYWNjb21wbGkgcGVuZGFudCBsZXMgYW5uZcyBZXMgMTg5MC05MS05MiIsImNyZWF0b3IiOiJQLi1MLiBNb250ZWlsIiwiZGF0ZSI6IlsxODk1P10iLCJtYWNoaW5lUmVhZGFibGVEYXRlIjoiMTg5NSIsImxhbmd1YWdlIjoiZnJlIiwiZ2VuZXJhbEZvcm1hdCI6IkJvb2siLCJzcGVjaWZpY0Zvcm1hdCI6IlByaW50Qm9vayIsInB1Ymxpc2hlciI6IkYuIEFsY2FuIiwicHVibGljYXRpb25QbGFjZSI6IlBhcmlzIiwibWVyZ2VkT2NsY051bWJlcnMiOlsiMTAwNzQ3MDU4MiJdLCJjYXRhbG9naW5nSW5mbyI6eyJjYXRhbG9naW5nQWdlbmN5IjoiQ1VGIiwiY2F0YWxvZ2luZ0xhbmd1YWdlIjoiZW5nIiwibGV2ZWxPZkNhdGFsb2dpbmciOiIgIiwidHJhbnNjcmliaW5nQWdlbmN5IjoiQ1VGIn0sImluc3RpdHV0aW9uSG9sZGluZyI6eyJ0b3RhbEhvbGRpbmdDb3VudCI6MH19XX0=
-  recorded_at: Tue, 07 Jan 2025 23:01:10 GMT
+  recorded_at: Fri, 10 Jan 2025 20:39:29 GMT
 recorded_with: VCR 6.3.1
