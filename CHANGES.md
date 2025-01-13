@@ -1,3 +1,7 @@
+# 4.1.0 (2025-01-10)
+
+- Fixed token refresh function and test
+
 # 4.0.0 (2025-01-08)
 
 - Update from Worldcat API v1 to API v2
