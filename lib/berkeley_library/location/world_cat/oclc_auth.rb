@@ -22,6 +22,9 @@ module BerkeleyLibrary
           http = Net::HTTP.new(url.host, url.port)
           http.use_ssl = url.scheme == 'https'
 
+          # Skip SSL verification ONLY when recording new VCR cassettes
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE if ENV['RE_RECORD_VCR'] == 'true'
+
           request = Net::HTTP::Post.new(url.request_uri)
           request.basic_auth(Config.api_key, Config.api_secret)
           request['Accept'] = 'application/json'

@@ -7,22 +7,22 @@ module BerkeleyLibrary
       include Constants
       include BerkeleyLibrary::Logging
 
-      COL_NRLF = 'NRLF'.freeze
-      COL_SRLF = 'SRLF'.freeze
+      COL_SLFN = 'SLFN'.freeze
+      COL_SLFS = 'SLFS'.freeze
       COL_OTHER_UC = 'Other UC'.freeze
       COL_WC_ERROR = 'WorldCat Error'.freeze
 
       COL_HATHI_TRUST = 'Hathi Trust'.freeze
       COL_HATHI_TRUST_ERROR = "#{COL_HATHI_TRUST} Error".freeze
 
-      V_NRLF = 'nrlf'.freeze
-      V_SRLF = 'srlf'.freeze
+      V_SLFN = 'slfn'.freeze
+      V_SLFS = 'slfs'.freeze
 
-      attr_reader :ss, :rlf, :uc, :hathi_trust
+      attr_reader :ss, :slf, :uc, :hathi_trust
 
-      def initialize(ss, rlf: true, uc: true, hathi_trust: true)
+      def initialize(ss, slf: true, uc: true, hathi_trust: true)
         @ss = ss
-        @rlf = rlf
+        @slf = slf
         @uc = uc
         @hathi_trust = hathi_trust
 
@@ -32,7 +32,7 @@ module BerkeleyLibrary
       def <<(result)
         r_indices = row_indices_for(result.oclc_number)
         r_indices.each do |idx|
-          write_wc_cols(idx, result) if rlf || uc
+          write_wc_cols(idx, result) if slf || uc
           write_ht_cols(idx, result) if hathi_trust
         end
       end
@@ -41,7 +41,7 @@ module BerkeleyLibrary
 
       def write_wc_cols(r_index, result)
         write_wc_error(r_index, result)
-        write_rlf(r_index, result) if rlf
+        write_slf(r_index, result) if slf
         write_uc(r_index, result) if uc
       end
 
@@ -51,9 +51,9 @@ module BerkeleyLibrary
       end
 
       def ensure_columns!
-        if rlf
-          nrlf_col_index
-          srlf_col_index
+        if slf
+          slfn_col_index
+          slfs_col_index
         end
         uc_col_index if uc
         ht_col_index if hathi_trust
@@ -66,9 +66,9 @@ module BerkeleyLibrary
         raise ArgumentError, "Unknown OCLC number: #{oclc_number}"
       end
 
-      def write_rlf(r_index, result)
-        ss.set_value_at(r_index, nrlf_col_index, V_NRLF) if result.nrlf?
-        ss.set_value_at(r_index, srlf_col_index, V_SRLF) if result.srlf?
+      def write_slf(r_index, result)
+        ss.set_value_at(r_index, slfn_col_index, V_SLFN) if result.slfn?
+        ss.set_value_at(r_index, slfs_col_index, V_SLFS) if result.slfs?
       end
 
       def write_uc(r_index, result)
@@ -99,12 +99,12 @@ module BerkeleyLibrary
         @oclc_col_index ||= ss.find_column_index_by_header!(OCLC_COL_HEADER)
       end
 
-      def nrlf_col_index
-        @nrlf_col_index ||= ss.ensure_column!(COL_NRLF)
+      def slfn_col_index
+        @slfn_col_index ||= ss.ensure_column!(COL_SLFN)
       end
 
-      def srlf_col_index
-        @srlf_col_index ||= ss.ensure_column!(COL_SRLF)
+      def slfs_col_index
+        @slfs_col_index ||= ss.ensure_column!(COL_SLFS)
       end
 
       def uc_col_index

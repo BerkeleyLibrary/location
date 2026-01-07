@@ -3,22 +3,28 @@ module BerkeleyLibrary
     module WorldCat
       describe LibrariesRequest do
         let(:oclc_number) { '85833285' }
-        # let(:wc_base_url) { 'https://www.example.test/webservices/' }
         let(:wc_base_url) { 'https://americas.discovery.api.oclc.org/worldcat/search/v2/' }
         let(:wc_api_key) { '2lo55pdh7moyfodeo4gwgms0on65x31ghv0g6yg87ffwaljsdw' }
         let(:wc_api_secret) { 'totallyfakesecret' }
 
-        # before do
-        #   # Config.base_uri = wc_base_url
-        #   # Config.api_key = wc_api_key
-        #   # Config.api_secret = wc_api_secret
-        # end
-
         after do
-          Config.send(:reset!)
+          BerkeleyLibrary::Location::WorldCat::OCLCAuth
+            .instance_variable_set(:@singleton__instance__, nil)
         end
 
+
         describe :new do
+          before do
+            auth = instance_double(
+              BerkeleyLibrary::Location::WorldCat::OCLCAuth,
+              access_token: 'fake-access-token'
+            )
+
+            allow(BerkeleyLibrary::Location::WorldCat::OCLCAuth)
+              .to receive(:new)
+              .and_return(auth)
+          end
+
           describe :oclc_number do
             it 'accepts a valid OCLC number' do
               q = LibrariesRequest.new(oclc_number)
@@ -65,13 +71,24 @@ module BerkeleyLibrary
             end
 
             it 'rejects an array containing nonexistent symbols' do
-              bad_symbols = [Symbols::NRLF, ['not a WorldCat institution symbol'], Symbols::SRLF].flatten
+              bad_symbols = [Symbols::SLFN, ['not a WorldCat institution symbol'], Symbols::SLFS].flatten
               expect { LibrariesRequest.new(oclc_number, symbols: bad_symbols) }.to raise_error(ArgumentError)
             end
           end
         end
 
         describe :uri do
+          before do
+            auth = instance_double(
+              BerkeleyLibrary::Location::WorldCat::OCLCAuth,
+              access_token: 'fake-access-token'
+            )
+
+            allow(BerkeleyLibrary::Location::WorldCat::OCLCAuth)
+              .to receive(:new)
+              .and_return(auth)
+          end
+
           it 'returns the URI for the specified OCLC number' do
             uri_expected = URI.parse("#{wc_base_url}bibs-holdings")
             uri_actual = LibrariesRequest.new(oclc_number).uri
@@ -92,7 +109,7 @@ module BerkeleyLibrary
 
           it 'returns a specified subset of holdings' do
             holdings_expected = %w[ZAP]
-            symbols = Symbols::RLF
+            symbols = Symbols::SLF
             req = LibrariesRequest.new(oclc_number, symbols:)
 
             VCR.use_cassette('libraries_request/execute_holdings_2') do
@@ -116,7 +133,7 @@ module BerkeleyLibrary
 
           it 'returns an empty list when no holdings are found' do
             oclc_number = '10045193'
-            symbols = Symbols::RLF
+            symbols = Symbols::SLF
             req = LibrariesRequest.new(oclc_number, symbols:)
 
             VCR.use_cassette('libraries_request/execute_holdings_4') do
