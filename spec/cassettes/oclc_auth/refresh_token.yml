@@ -21,13 +21,13 @@ http_interactions:
       message: ''
     headers:
       X-Oclc-Requestid:
-      - 32040e79-4eb4-441c-b0b4-cd89c465fb14
+      - 2ef11928-b4bf-4762-8c2d-505743eca701
       X-Oclc-Selfid:
-      - 5f76a91e-1a12-421c-91fb-ff0868d54de5
+      - 91ef1422-41a8-437c-bf1c-311edae3f183
       Set-Cookie:
       - BIGipServermdc1_prdctn_p_oauth-m1-wskeyv3ws-443_8443=3643927050.64288.0000;
-        expires=Tue, 14-Jan-2025 00:13:47 GMT; path=/; Httponly; Secure
-      - JSESSIONID=D3C312F07DAE52057E0C6A3B5F5CDDC0; Path=/; Secure; HttpOnly; SameSite=None
+        expires=Thu, 08-Jan-2026 01:51:42 GMT; path=/; Httponly; Secure
+      - JSESSIONID=1EA852A0930B48033B224FBC7401B440; Path=/; Secure; HttpOnly; SameSite=None
       Vary:
       - Access-Control-Request-Headers
       - Access-Control-Request-Method
@@ -49,10 +49,10 @@ http_interactions:
       Transfer-Encoding:
       - chunked
       Date:
-      - Mon, 13 Jan 2025 23:13:46 GMT
+      - Thu, 08 Jan 2026 00:51:42 GMT
     body:
       encoding: UTF-8
-      string: '{"access_token":"tk_duMxBzoniydg88uTQYOaxP7YInAmKj46YNAW","expires_at":"2025-01-13
-        23:33:47Z","authenticating_institution_id":"5689","scope":"wcapi:view_institution_holdings","principalID":"","context_institution_id":"5689","scopes":"wcapi:view_institution_holdings","token_type":"bearer","expires_in":1199,"principalIDNS":""}'
-  recorded_at: Mon, 13 Jan 2025 23:13:47 GMT
-recorded_with: VCR 6.3.1
+      string: '{"access_token":"tk_BpG66687TEYFDcQCpcITwDETaenN2pY0dZXS","expires_at":"2026-01-08
+        01:11:42Z","authenticating_institution_id":"5689","scope":"wcapi:view_institution_holdings","principalID":"","context_institution_id":"5689","scopes":"wcapi:view_institution_holdings","token_type":"bearer","expires_in":1199,"principalIDNS":""}'
+  recorded_at: Thu, 08 Jan 2026 00:51:42 GMT
+recorded_with: VCR 6.4.0
