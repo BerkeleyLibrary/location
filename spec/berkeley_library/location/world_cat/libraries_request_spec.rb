@@ -7,24 +7,23 @@ module BerkeleyLibrary
         let(:wc_api_key) { '2lo55pdh7moyfodeo4gwgms0on65x31ghv0g6yg87ffwaljsdw' }
         let(:wc_api_secret) { 'totallyfakesecret' }
 
+        before do
+          auth = instance_double(
+            BerkeleyLibrary::Location::WorldCat::OCLCAuth,
+            access_token: 'fake-access-token'
+          )
+
+          allow(BerkeleyLibrary::Location::WorldCat::OCLCAuth)
+            .to receive(:instance)
+            .and_return(auth)
+        end
+
         after do
           BerkeleyLibrary::Location::WorldCat::OCLCAuth
             .instance_variable_set(:@singleton__instance__, nil)
         end
 
-
         describe :new do
-          before do
-            auth = instance_double(
-              BerkeleyLibrary::Location::WorldCat::OCLCAuth,
-              access_token: 'fake-access-token'
-            )
-
-            allow(BerkeleyLibrary::Location::WorldCat::OCLCAuth)
-              .to receive(:new)
-              .and_return(auth)
-          end
-
           describe :oclc_number do
             it 'accepts a valid OCLC number' do
               q = LibrariesRequest.new(oclc_number)
@@ -78,17 +77,6 @@ module BerkeleyLibrary
         end
 
         describe :uri do
-          before do
-            auth = instance_double(
-              BerkeleyLibrary::Location::WorldCat::OCLCAuth,
-              access_token: 'fake-access-token'
-            )
-
-            allow(BerkeleyLibrary::Location::WorldCat::OCLCAuth)
-              .to receive(:new)
-              .and_return(auth)
-          end
-
           it 'returns the URI for the specified OCLC number' do
             uri_expected = URI.parse("#{wc_base_url}bibs-holdings")
             uri_actual = LibrariesRequest.new(oclc_number).uri
@@ -101,10 +89,31 @@ module BerkeleyLibrary
             holdings_expected = %w[CUI CUY MERUC ZAP]
             req = LibrariesRequest.new(oclc_number)
 
-            VCR.use_cassette('libraries_request/execute_holdings_1') do
-              holdings_actual = req.execute
-              expect(holdings_actual).to contain_exactly(*holdings_expected)
-            end
+            allow(BerkeleyLibrary::Util::URIs).to receive(:get).and_return(
+              {
+                'briefRecords' => [
+                  {
+                    'institutionHolding' => {
+                      'briefHoldings' => [
+                        { 'oclcSymbol' => 'CUI' },
+                        { 'oclcSymbol' => 'CUY' }
+                      ]
+                    }
+                  },
+                  {
+                    'institutionHolding' => {
+                      'briefHoldings' => [
+                        { 'oclcSymbol' => 'MERUC' },
+                        { 'oclcSymbol' => 'ZAP' }
+                      ]
+                    }
+                  }
+                ]
+              }
+            )
+
+            holdings_actual = req.execute
+            expect(holdings_actual).to contain_exactly(*holdings_expected)
           end
 
           it 'returns a specified subset of holdings' do
@@ -112,10 +121,22 @@ module BerkeleyLibrary
             symbols = Symbols::SLF
             req = LibrariesRequest.new(oclc_number, symbols:)
 
-            VCR.use_cassette('libraries_request/execute_holdings_2') do
-              holdings_actual = req.execute
-              expect(holdings_actual).to contain_exactly(*holdings_expected)
-            end
+            allow(BerkeleyLibrary::Util::URIs).to receive(:get).and_return(
+              {
+                'briefRecords' => [
+                  {
+                    'institutionHolding' => {
+                      'briefHoldings' => [
+                        { 'oclcSymbol' => 'ZAP' }
+                      ]
+                    }
+                  }
+                ]
+              }
+            )
+
+            holdings_actual = req.execute
+            expect(holdings_actual).to contain_exactly(*holdings_expected)
           end
 
           # NOTE: WorldCat *shouldn't* return holdings information for any
@@ -125,10 +146,30 @@ module BerkeleyLibrary
             symbols = Symbols::UC
             req = LibrariesRequest.new(oclc_number, symbols:)
 
-            VCR.use_cassette('libraries_request/execute_holdings_3') do
-              holdings_actual = req.execute
-              expect(holdings_actual).to contain_exactly(*holdings_expected)
-            end
+            allow(BerkeleyLibrary::Util::URIs).to receive(:get).and_return(
+              {
+                'briefRecords' => [
+                  {
+                    'institutionHolding' => {
+                      'briefHoldings' => [
+                        { 'oclcSymbol' => 'CUI' },
+                        { 'oclcSymbol' => 'CUY' }
+                      ]
+                    }
+                  },
+                  {
+                    'institutionHolding' => {
+                      'briefHoldings' => [
+                        { 'oclcSymbol' => 'MERUC' }
+                      ]
+                    }
+                  }
+                ]
+              }
+            )
+
+            holdings_actual = req.execute
+            expect(holdings_actual).to contain_exactly(*holdings_expected)
           end
 
           it 'returns an empty list when no holdings are found' do
@@ -136,10 +177,16 @@ module BerkeleyLibrary
             symbols = Symbols::SLF
             req = LibrariesRequest.new(oclc_number, symbols:)
 
-            VCR.use_cassette('libraries_request/execute_holdings_4') do
-              holdings_actual = req.execute
-              expect(holdings_actual).to be_empty
-            end
+            # Stub a response with empty holdings
+            stub_request(:get, /bibs-holdings/)
+              .to_return(
+                status: 200,
+                headers: { 'Content-Type' => 'application/json' },
+                body: { holdings: [] }.to_json
+              )
+
+            holdings_actual = req.execute
+            expect(holdings_actual).to be_empty
           end
         end
       end

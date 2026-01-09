@@ -13,21 +13,19 @@ http_interactions:
       - application/json
       User-Agent:
       - Ruby
-      Authorization:
-      - "<AUTHORIZATION>"
   response:
     status:
       code: 200
       message: ''
     headers:
       X-Oclc-Requestid:
-      - 2ef11928-b4bf-4762-8c2d-505743eca701
+      - a44987db-5132-49dd-9349-1352d6db30e8
       X-Oclc-Selfid:
-      - 91ef1422-41a8-437c-bf1c-311edae3f183
+      - 8f7cdcaf-3a2c-49da-a469-60e02d2f0888
       Set-Cookie:
-      - BIGipServermdc1_prdctn_p_oauth-m1-wskeyv3ws-443_8443=3643927050.64288.0000;
-        expires=Thu, 08-Jan-2026 01:51:42 GMT; path=/; Httponly; Secure
-      - JSESSIONID=1EA852A0930B48033B224FBC7401B440; Path=/; Secure; HttpOnly; SameSite=None
+      - BIGipServermdc1_prdctn_p_oauth-m1-wskeyv3ws-443_8443=3660704266.64288.0000;
+        expires=Fri, 09-Jan-2026 03:00:53 GMT; path=/; Httponly; Secure
+      - JSESSIONID=2E223BDF84EB78B45832463FE2B6E8B8; Path=/; Secure; HttpOnly; SameSite=None
       Vary:
       - Access-Control-Request-Headers
       - Access-Control-Request-Method
@@ -49,10 +47,10 @@ http_interactions:
       Transfer-Encoding:
       - chunked
       Date:
-      - Thu, 08 Jan 2026 00:51:42 GMT
+      - Fri, 09 Jan 2026 02:00:53 GMT
     body:
       encoding: UTF-8
-      string: '{"access_token":"tk_BpG66687TEYFDcQCpcITwDETaenN2pY0dZXS","expires_at":"2026-01-08
-        01:11:42Z","authenticating_institution_id":"5689","scope":"wcapi:view_institution_holdings","principalID":"","context_institution_id":"5689","scopes":"wcapi:view_institution_holdings","token_type":"bearer","expires_in":1199,"principalIDNS":""}'
-  recorded_at: Thu, 08 Jan 2026 00:51:42 GMT
+      string: '{"access_token":"tk_740TI0S8RhUcQRjiL9wmN6K3BWl2icHaAD7s","expires_at":"2026-01-09
+        02:20:53Z","authenticating_institution_id":"5689","scope":"wcapi:view_institution_holdings","principalID":"","context_institution_id":"5689","scopes":"wcapi:view_institution_holdings","token_type":"bearer","expires_in":1199,"principalIDNS":""}'
+  recorded_at: Fri, 09 Jan 2026 02:00:53 GMT
 recorded_with: VCR 6.4.0

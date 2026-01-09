@@ -36,12 +36,83 @@ module BerkeleyLibrary
           end
         end
 
-        describe '#token_expired?' do
+        describe '#access_token' do
           subject(:oclc_auth) { described_class.instance }
 
-          it 'returns true if @token is nil' do
+          after do
+            # Reset token so other tests aren't affected
             oclc_auth.instance_variable_set(:@token, nil)
-            expect(oclc_auth.send(:token_expired?)).to be true
+          end
+
+          it 'returns the current token if not expired' do
+            oclc_auth.instance_variable_set(:@token, { access_token: 'existing-token', expires_at: (Time.now + 60).to_s })
+            expect(oclc_auth.access_token).to eq('existing-token')
+          end
+
+          it 'fetches a new token if expired' do
+            allow(oclc_auth).to receive(:fetch_token).and_return({ access_token: 'new-token', expires_at: (Time.now + 3600).to_s })
+            oclc_auth.instance_variable_set(:@token, { access_token: 'old-token', expires_at: (Time.now - 60).to_s })
+            expect(oclc_auth.access_token).to eq('new-token')
+          end
+
+          describe '#token_expired?' do
+            subject(:oclc_auth) { described_class.instance }
+
+            it 'returns true if @token is nil' do
+              oclc_auth.instance_variable_set(:@token, nil)
+              expect(oclc_auth.send(:token_expired?)).to be true
+            end
+
+            it 'returns true if token is expired' do
+              oclc_auth.instance_variable_set(:@token, { access_token: 'x', expires_at: (Time.now - 1).to_s })
+              expect(oclc_auth.send(:token_expired?)).to be true
+            end
+
+            it 'returns false if token is still valid' do
+              oclc_auth.instance_variable_set(:@token, { access_token: 'x', expires_at: (Time.now + 60).to_s })
+              expect(oclc_auth.send(:token_expired?)).to be false
+            end
+          end
+        end
+
+        describe '#skip_ssl_verification?' do
+          subject(:oclc_auth) { described_class.instance }
+
+          it 'returns true when RE_RECORD_VCR=true' do
+            allow(ENV).to receive(:[]).with('RE_RECORD_VCR').and_return('true')
+            expect(oclc_auth.send(:skip_ssl_verification?)).to be true
+          end
+        end
+
+        describe '#fetch_token (SSL verification false branch)' do
+          subject(:oclc_auth) { described_class.instance }
+
+          let(:url) { URI('https://example.test/token') }
+          let(:http) { instance_double(Net::HTTP) }
+          let(:response) do
+            instance_double(Net::HTTPResponse, body: '{"access_token":"abc"}')
+          end
+
+          before do
+            allow(oclc_auth).to receive(:skip_ssl_verification?).and_return(false)
+            allow(oclc_auth).to receive(:oclc_token_url).and_return(url)
+
+            allow(Net::HTTP).to receive(:new).and_return(http)
+            allow(http).to receive(:use_ssl=).with(true)
+            allow(http).to receive(:request).and_return(response)
+
+            allow(Config).to receive(:api_key).and_return('key')
+            allow(Config).to receive(:api_secret).and_return('secret')
+          end
+
+          after do
+            oclc_auth.instance_variable_set(:@token, nil)
+          end
+
+          it 'does not disable SSL verification when skip_ssl_verification? is false' do
+            expect(http).not_to receive(:verify_mode=)
+
+            oclc_auth.send(:fetch_token)
           end
         end
       end

@@ -20,21 +20,25 @@ VCR.configure do |config|
   config.filter_sensitive_data('<API_KEY>') { ENV.fetch('LIT_WORLDCAT_API_KEY', nil) }
   config.filter_sensitive_data('<API_SECRET>') { ENV.fetch('LIT_WORLDCAT_API_SECRET', nil) }
 
-  # Allow external connections to specific URLs if needed
-  config.allow_http_connections_when_no_cassette = true
+  # NO migraine inducing external connections!
+  config.allow_http_connections_when_no_cassette = false
 
   # Only record new cassettes when we explicitly allow it
   config.default_cassette_options = {
-    record: ENV.fetch('RE_RECORD_VCR', 'false') == 'true' ? :all : :once
+    record: ENV.fetch('RE_RECORD_VCR', 'false') == 'true' ? :all : :once,
+    match_requests_on: %i[method uri query]
   }
+
+  config.before_record do |i|
+    i.request.headers.delete('Authorization')
+  end
+
+  config.before_playback do |i|
+    i.request.headers.delete('Authorization')
+  end
 
   # Log debug info to a separate file...if you want
   # config.debug_logger = File.open('spec/vcr_debug.log', 'w')
-
-  # Mask Authorization headers
-  config.before_record do |i|
-    i.request.headers['Authorization'] = ['<AUTHORIZATION>'] if i.request.headers['Authorization']
-  end
 end
 
 RSpec.configure do |config|

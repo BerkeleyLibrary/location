@@ -17,20 +17,33 @@ module BerkeleyLibrary
         end
 
         def fetch_token
+          response = http_client.request(token_request)
+          parse_token_response(response)
+        end
+
+        def http_client
           url = oclc_token_url
 
-          http = Net::HTTP.new(url.host, url.port)
-          http.use_ssl = url.scheme == 'https'
+          Net::HTTP.new(url.host, url.port).tap do |http|
+            http.use_ssl = url.scheme == 'https'
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE if skip_ssl_verification?
+          end
+        end
 
-          # Skip SSL verification ONLY when recording new VCR cassettes
-          http.verify_mode = OpenSSL::SSL::VERIFY_NONE if ENV['RE_RECORD_VCR'] == 'true'
+        def token_request
+          Net::HTTP::Post.new(oclc_token_url.request_uri).tap do |request|
+            request.basic_auth(Config.api_key, Config.api_secret)
+            request['Accept'] = 'application/json'
+          end
+        end
 
-          request = Net::HTTP::Post.new(url.request_uri)
-          request.basic_auth(Config.api_key, Config.api_secret)
-          request['Accept'] = 'application/json'
-          response = http.request(request)
-
+        def parse_token_response(response)
           JSON.parse(response.body, symbolize_names: true)
+        end
+
+        # Skip SSL verification ONLY when recording new VCR cassettes
+        def skip_ssl_verification?
+          ENV['RE_RECORD_VCR'] == 'true'
         end
 
         def oclc_token_url
