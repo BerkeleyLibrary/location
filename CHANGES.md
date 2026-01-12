@@ -1,3 +1,8 @@
+# 4.2.0 (2026-01-06)
+
+- Rename RLF to SLF (NRLF -> SLFN, SRLF -> SLFS)
+- Added bypass to skip SSL verification ONLY when recording new VCR cassettes
+
 # 4.1.0 (2025-01-10)
 
 - Fixed token refresh function and test

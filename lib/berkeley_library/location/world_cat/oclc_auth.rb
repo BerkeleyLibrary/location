@@ -17,16 +17,7 @@ module BerkeleyLibrary
         end
 
         def fetch_token
-          url = oclc_token_url
-
-          http = Net::HTTP.new(url.host, url.port)
-          http.use_ssl = url.scheme == 'https'
-
-          request = Net::HTTP::Post.new(url.request_uri)
-          request.basic_auth(Config.api_key, Config.api_secret)
-          request['Accept'] = 'application/json'
-          response = http.request(request)
-
+          response = http_request(oclc_token_url)
           JSON.parse(response.body, symbolize_names: true)
         end
 
@@ -41,6 +32,23 @@ module BerkeleyLibrary
         end
 
         private
+
+        def http_request(url)
+          http = build_http(url)
+          request = Net::HTTP::Post.new(url.request_uri)
+          request.basic_auth(Config.api_key, Config.api_secret)
+          request['Accept'] = 'application/json'
+          http.request(request)
+        end
+
+        def build_http(url)
+          http = Net::HTTP.new(url.host, url.port)
+          http.use_ssl = url.scheme == 'https'
+
+          # Skip SSL verification ONLY when recording new VCR cassettes
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE if ENV['RE_RECORD_VCR'] == 'true'
+          http
+        end
 
         def token_params
           {

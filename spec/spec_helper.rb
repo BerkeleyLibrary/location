@@ -20,8 +20,8 @@ VCR.configure do |config|
   config.filter_sensitive_data('<API_KEY>') { ENV.fetch('LIT_WORLDCAT_API_KEY', nil) }
   config.filter_sensitive_data('<API_SECRET>') { ENV.fetch('LIT_WORLDCAT_API_SECRET', nil) }
 
-  # Allow external connections to specific URLs if needed
-  config.allow_http_connections_when_no_cassette = true
+  # NO...no real HTTP connections unless we're re-recording VCR
+  config.allow_http_connections_when_no_cassette = false
 
   # Only record new cassettes when we explicitly allow it
   config.default_cassette_options = {

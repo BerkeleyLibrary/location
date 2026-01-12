@@ -13,12 +13,12 @@ module BerkeleyLibrary
         @ht_error = ht_error
       end
 
-      def nrlf?
-        @has_nrlf ||= wc_symbols.intersection(WorldCat::Symbols::NRLF).any?
+      def slfn?
+        @has_slfn ||= wc_symbols.intersection(WorldCat::Symbols::SLFN).any?
       end
 
-      def srlf?
-        @has_srlf ||= wc_symbols.intersection(WorldCat::Symbols::SRLF).any?
+      def slfs?
+        @has_slfs ||= wc_symbols.intersection(WorldCat::Symbols::SLFS).any?
       end
 
       def uc_symbols

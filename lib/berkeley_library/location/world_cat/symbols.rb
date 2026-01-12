@@ -2,12 +2,12 @@ module BerkeleyLibrary
   module Location
     module WorldCat
       module Symbols
-        NRLF = %w[ZAP ZAPSP].freeze
-        SRLF = %w[HH0 ZAS ZASSP].freeze
-        RLF = (NRLF + SRLF).freeze
+        SLFN = %w[ZAP ZAPSP].freeze
+        SLFS = %w[HH0 ZAS ZASSP].freeze
+        SLF = (SLFN + SLFS).freeze
 
         UC = %w[CLU CRU CUI CUN CUS CUT CUV CUX CUY CUZ MERUC].freeze
-        ALL = (RLF + UC).freeze
+        ALL = (SLF + UC).freeze
 
         class << self
           include Symbols

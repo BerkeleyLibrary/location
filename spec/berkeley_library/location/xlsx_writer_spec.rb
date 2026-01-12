@@ -28,8 +28,8 @@ module BerkeleyLibrary
           it 'writes a result' do
             expected = {
               'OCLC Number' => oclc_number.to_i,
-              'NRLF' => 'nrlf',
-              'SRLF' => 'srlf',
+              'SLFN' => 'slfn',
+              'SLFS' => 'slfs',
               'Other UC' => 'CLU,CUY',
               'Hathi Trust' => record_url,
               # check that we preserve existing values
@@ -57,8 +57,8 @@ module BerkeleyLibrary
 
             expected = {
               'OCLC Number' => oclc_number.to_i,
-              'NRLF' => nil,
-              'SRLF' => nil,
+              'SLFN' => nil,
+              'SLFS' => nil,
               'Other UC' => nil,
               'Hathi Trust' => record_url,
               'WorldCat Error' => err_msg,
@@ -87,8 +87,8 @@ module BerkeleyLibrary
 
             expected = {
               'OCLC Number' => oclc_number.to_i,
-              'NRLF' => 'nrlf',
-              'SRLF' => 'srlf',
+              'SLFN' => 'slfn',
+              'SLFS' => 'slfs',
               'Other UC' => 'CLU,CUY',
               'Hathi Trust' => nil,
               'Hathi Trust Error' => err_msg,
@@ -113,8 +113,8 @@ module BerkeleyLibrary
 
             expected = {
               'OCLC Number' => oclc_number.to_i,
-              'NRLF' => nil,
-              'SRLF' => nil,
+              'SLFN' => nil,
+              'SLFS' => nil,
               'Other UC' => nil,
               'Hathi Trust' => record_url,
               # check that we preserve existing values
@@ -134,7 +134,7 @@ module BerkeleyLibrary
               wc_symbols: %w[CLU CUY ZAP ZAS]
             )
 
-            writer = XLSXWriter.new(ss, rlf: false, uc: false)
+            writer = XLSXWriter.new(ss, slf: false, uc: false)
             writer << result
 
             expected = {
@@ -150,7 +150,7 @@ module BerkeleyLibrary
               expect(v_actual).to eq(v_expected)
             end
 
-            ['NRLF', 'SRLF', 'Other UC'].each do |header|
+            ['SLFN', 'SLFS', 'Other UC'].each do |header|
               c_index = ss.find_column_index_by_header(header)
               expect(c_index).to be_nil
             end
@@ -172,8 +172,8 @@ module BerkeleyLibrary
 
             expected = {
               'OCLC Number' => oclc_number_next.to_i,
-              'NRLF' => 'nrlf',
-              'SRLF' => 'srlf',
+              'SLFN' => 'slfn',
+              'SLFS' => 'slfs',
               'Other UC' => 'CLU,CUY',
               'Hathi Trust' => nil,
               # check that we preserve existing values
@@ -187,7 +187,7 @@ module BerkeleyLibrary
             end
           end
 
-          it 'can write a result without NRLF' do
+          it 'can write a result without SLFN' do
             writer = XLSXWriter.new(ss)
             writer << result
 
@@ -203,8 +203,8 @@ module BerkeleyLibrary
 
             expected = {
               'OCLC Number' => oclc_number_next.to_i,
-              'NRLF' => nil,
-              'SRLF' => 'srlf',
+              'SLFN' => nil,
+              'SLFS' => 'slfs',
               'Other UC' => 'CLU,CUY',
               'Hathi Trust' => nil,
               # check that we preserve existing values
@@ -234,8 +234,8 @@ module BerkeleyLibrary
 
             expected = {
               'OCLC Number' => oclc_number_next.to_i,
-              'NRLF' => 'nrlf',
-              'SRLF' => 'srlf',
+              'SLFN' => 'slfn',
+              'SLFS' => 'slfs',
               'Other UC' => nil,
               'Hathi Trust' => nil,
               # check that we preserve existing values
@@ -249,7 +249,7 @@ module BerkeleyLibrary
             end
           end
 
-          it 'can write a result without SRLF' do
+          it 'can write a result without SLFS' do
             writer = XLSXWriter.new(ss)
             writer << result
 
@@ -265,8 +265,8 @@ module BerkeleyLibrary
 
             expected = {
               'OCLC Number' => oclc_number_next.to_i,
-              'NRLF' => 'nrlf',
-              'SRLF' => nil,
+              'SLFN' => 'slfn',
+              'SLFS' => nil,
               'Other UC' => 'CLU,CUY',
               'Hathi Trust' => nil,
               # check that we preserve existing values
@@ -280,7 +280,7 @@ module BerkeleyLibrary
             end
           end
 
-          it 'can skip RLF columns' do
+          it 'can skip SLF columns' do
             expected = {
               'OCLC Number' => oclc_number.to_i,
               'Other UC' => 'CLU,CUY',
@@ -289,7 +289,7 @@ module BerkeleyLibrary
               'MMSID' => ss.value_at(r_index, c_index_mmsid)
             }
 
-            writer = XLSXWriter.new(ss, rlf: false)
+            writer = XLSXWriter.new(ss, slf: false)
             writer << result
 
             expected.each do |col_header, v_expected|
@@ -298,7 +298,7 @@ module BerkeleyLibrary
               expect(v_actual).to eq(v_expected)
             end
 
-            %w[NRLF SRLF].each do |col_header|
+            %w[SLFN SLFS].each do |col_header|
               c_index = ss.find_column_index_by_header(col_header)
               expect(c_index).to be_nil
             end
@@ -307,8 +307,8 @@ module BerkeleyLibrary
           it 'can skip the Other UC column' do
             expected = {
               'OCLC Number' => oclc_number.to_i,
-              'NRLF' => 'nrlf',
-              'SRLF' => 'srlf',
+              'SLFN' => 'slfn',
+              'SLFS' => 'slfs',
               'Hathi Trust' => record_url,
               # check that we preserve existing values
               'MMSID' => ss.value_at(r_index, c_index_mmsid)
@@ -330,8 +330,8 @@ module BerkeleyLibrary
           it 'can skip the Hathi Trust column' do
             expected = {
               'OCLC Number' => oclc_number.to_i,
-              'NRLF' => 'nrlf',
-              'SRLF' => 'srlf',
+              'SLFN' => 'slfn',
+              'SLFS' => 'slfs',
               'Other UC' => 'CLU,CUY',
               # check that we preserve existing values
               'MMSID' => ss.value_at(r_index, c_index_mmsid)
@@ -353,8 +353,8 @@ module BerkeleyLibrary
           it 'does not ignore rows with duplicate OCLC numbers' do
             expected = {
               'OCLC Number' => oclc_number.to_i,
-              'NRLF' => 'nrlf',
-              'SRLF' => 'srlf',
+              'SLFN' => 'slfn',
+              'SLFS' => 'slfs',
               'Other UC' => 'CLU,CUY',
               'Hathi Trust' => record_url,
               # check that we preserve existing values
@@ -373,7 +373,7 @@ module BerkeleyLibrary
               expect(v_actual).to eq(v_expected)
             end
 
-            ['NRLF', 'SRLF', 'Other UC', 'Hathi Trust'].each do |col_header|
+            ['SLFN', 'SLFS', 'Other UC', 'Hathi Trust'].each do |col_header|
               c_index = ss.find_column_index_by_header!(col_header)
               v_actual = ss.value_at(r_index_dup, c_index)
               expect(v_actual).to eq(expected[col_header])
@@ -387,8 +387,8 @@ module BerkeleyLibrary
 
             expected = {
               'OCLC Number' => oclc_number.to_i,
-              'NRLF' => 'nrlf',
-              'SRLF' => 'srlf',
+              'SLFN' => 'slfn',
+              'SLFS' => 'slfs',
               'Other UC' => 'CLU,CUY',
               'Hathi Trust' => record_url,
               # check that we preserve existing values
@@ -419,8 +419,8 @@ module BerkeleyLibrary
               'OCLC Number' => oclc_number.to_i,
               'Call #' => 'JN3971.A988 D38 2006',
               'Title' => 'Becoming party politicians : eastern German state legislators in the decade following democratization / Louise K. Davidson-Schmich.',
-              'NRLF' => nil,
-              'SRLF' => 'srlf',
+              'SLFN' => nil,
+              'SLFS' => 'slfs',
               'Other UC' => 'CUI,CUT,CUV',
               'Hathi Trust' => nil,
               'Hathi Trust Error' => '403 Forbidden'
