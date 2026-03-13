@@ -123,5 +123,5 @@ RSpec/VerifiedDoubles:
 RSpec/IdenticalEqualityAssertion: # new in 2.4
   Enabled: true
 
-RSpec/Rails/AvoidSetupHook: # new in 2.4
+RSpecRails/AvoidSetupHook:
   Enabled: true

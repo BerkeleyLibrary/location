@@ -19,6 +19,8 @@ module BerkeleyLibrary
         return to_enum(:each_oclc_number) unless block_given?
 
         ss.each_value(oclc_col_index, include_header: false) do |v|
+          # convert to integer if oclc number is a float in the spreadsheet
+          v = v.to_i if v.is_a?(Float)
           next if (v_str = v.to_s).strip == ''
 
           yield v_str
