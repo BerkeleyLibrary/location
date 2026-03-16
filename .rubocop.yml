@@ -3,6 +3,9 @@ inherit_mode:
     - Exclude
     - Include
 
+AllCops:
+  TargetRubyVersion: 3.3
+
 # Allow one line around block body (Layout/EmptyLines will still disallow two or more)
 Layout/EmptyLinesAroundBlockBody:
   Enabled: false
