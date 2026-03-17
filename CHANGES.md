@@ -1,3 +1,10 @@
+# 4.3.0 (2026-03-17)
+
+- Convert fload to int in spreadsheet if oclc number is a float
+- bump ruby version to 3.3
+- bump nokogiri to 1.19.1
+- bump rubocop to 1.75.0
+
 # 4.2.0 (2026-01-06)
 
 - Rename RLF to SLF (NRLF -> SLFN, SRLF -> SLFS)
